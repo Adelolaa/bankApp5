@@ -78,10 +78,8 @@ public class UserServiceImpl implements UserService {
             role.setRoleName("ROLE_USER");
              newUser.setRoles(Collections.singleton(role));
         }else{
-            System.out.println("called......1");
             newUser.setRoles(Collections.singleton(optionalRole.get()));
         }
-        System.out.println("out.....");
         User savedUser = userRepository.save(newUser);
         return new Response("successful",201, savedUser);
     }
