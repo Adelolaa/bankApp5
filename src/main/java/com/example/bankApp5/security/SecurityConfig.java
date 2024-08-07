@@ -64,9 +64,9 @@ public class SecurityConfig {
                                     "/api/users/signin",
                                     "/api/users/**"
                             ).permitAll()
-//                            .requestMatchers("/api/users/nameEnquiry").hasRole("USER")
-//                            .requestMatchers("api/users/credit").hasRole("USER")
-//                            .requestMatchers("/api/users/all/api/debit").hasRole("USER")
+                            .requestMatchers("/api/users/nameEnquiry").hasRole("USER")
+                           .requestMatchers("api/users/credit").hasRole("USER")
+                             .requestMatchers("/api/users/all/api/debit").hasRole("USER")
                             .anyRequest().authenticated())
          .httpBasic(Customizer.withDefaults());
 

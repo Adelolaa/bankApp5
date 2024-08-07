@@ -7,9 +7,9 @@ import com.example.bankApp5.entity.Role;
 import com.example.bankApp5.service.utils.AccountUtils;
 import com.example.bankApp5.entity.User;
 import com.example.bankApp5.service.utils.Response;
+import com.zaxxer.hikari.HikariConfig;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -253,16 +253,32 @@ public class UserServiceImpl implements UserService {
         }
 
     @Override
-    public Response login(LoginDto loginDto) {
-        Optional<User> optionalUser = userRepository.findByEmail(loginDto.getUsernameOrEmail());
-        if(optionalUser.isEmpty()) return  new Response("User not found",400,null);
-        else
-         return  new Response("Successfull",200,null);
+//    public Response login(LoginDto loginDto) {
+//        Optional<User> optionalUser = userRepository.findByEmail(loginDto.getUsernameOrEmail());
+//        if(optionalUser.isEmpty()) return  new Response("User not found",400,null);
+//        else
+//         return  new Response("Successfull",200,null);
+
+
+
+        public Response login (LoginDto loginDto) {
+            Optional<User> optionalUser = userRepository.findByEmail(loginDto.getUsernameOrEmail());
+            if (optionalUser.isEmpty()) {
+                return new Response("User not found", 400, null);
+            }
+
+            User user = optionalUser.get();
+            boolean isPasswordValid = passwordEncoder.matches(loginDto.getPassword(), user.getPassword());
+            if (!isPasswordValid) {
+                return new Response("Invalid password", 400, null);
+
+            }else return new Response("Successful", 200, null);
+        }
 
     };
 
 
-    }
+
 
 
 

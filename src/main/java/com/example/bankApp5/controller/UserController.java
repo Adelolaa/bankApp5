@@ -1,9 +1,7 @@
 package com.example.bankApp5.controller;
 
 import com.example.bankApp5.dto.*;
-import com.example.bankApp5.entity.User;
 import com.example.bankApp5.service.UserServiceImpl;
-import com.example.bankApp5.service.utils.AccountUtils;
 import com.example.bankApp5.service.utils.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
